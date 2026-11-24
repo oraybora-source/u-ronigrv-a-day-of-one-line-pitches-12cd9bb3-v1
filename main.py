@@ -10,6 +10,9 @@ dependencies beyond the Python standard library.
 
 import os
 
+# The brief caps the pitch at 240 characters (code points).
+MAX_CHARS = 240
+
 TEXT = (
     "Text an AI agent on make.fun the homework chart stuck to your fridge, "
     "and by dinner you'll have a working first version your kids can tap "
@@ -18,6 +21,8 @@ TEXT = (
 
 
 def main() -> None:
+    if len(TEXT) > MAX_CHARS:
+        raise ValueError("entry exceeds 240 characters")
     os.makedirs("/output", exist_ok=True)
     with open("/output/entry.txt", "w", encoding="utf-8", newline="") as f:
         f.write(TEXT)
